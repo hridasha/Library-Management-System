@@ -1,0 +1,69 @@
+<odoo>
+    <record model="ir.ui.view" id="view_attendance_kanban">
+        <field name="name">attendance.kanban</field>
+        <field name="model">my_attendance.attendance</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click" style="max-width: fit-content; border: 1px solid #ccc; padding: 10px;">
+                            <div class="oe_kanban_content">
+                                <div class="user-info">
+                                    <field name="employee_id" widget="many2one_avatar" />
+                                    <field name="employee_id" style="font-size: 24px; margin-top: 10px;"/>
+                                </div>
+                                <div class="attendance-details">
+                                    <div class="check-in">
+                                        <div class="o_form_label">Check In:</div>
+                                        <field name="check_in" style="font-size: 18px;"/>
+                                    </div>
+                                    <div class="check-out">
+                                        <div class="o_form_label">Check Out:</div>
+                                        <field name="check_out" style="font-size: 18px;"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_bottom_right" style="margin-top: 10px;">
+                                <button name="action_check_in" type="object"
+                                    string="Check In" class="btn-primary" style="font-size: 16px; margin-right: 10px;padding:5px"/><br><br></br></br>
+                                <button name="action_check_out" type="object"
+                                    string="Check Out" class="btn-primary" style="font-size: 16px; margin-right: 10px;padding:5px"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+        <!-- Action for Reporting Kanban View -->
+        <record model="ir.actions.act_window" id="action_attendance_kanban">
+            <field name="name">Attendance Reporting</field>
+            <field name="res_model">my_attendance.attendance</field>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="view_attendance_kanban"/>
+        </record>
+
+        <!-- Tree View for Attendance Details -->
+        <record model="ir.ui.view" id="view_attendance_details_tree">
+            <field name="name">attendance.details.tree</field>
+            <field name="model">my_attendance.attendance</field>
+            <field name="arch" type="xml">
+                <tree create="false" delete="false">
+                    <field name="employee_id"/>
+                    <field name="check_in"/>
+                    <field name="check_out"/>
+                    <field name="hours_worked"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Action for Attendance Details -->
+        <record model="ir.actions.act_window" id="action_attendance_details">
+            <field name="name">Attendance Details</field>
+            <field name="res_model">my_attendance.attendance</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_attendance_details_tree"/>
+        </record>
+
+</odoo>

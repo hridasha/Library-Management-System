@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- order action -->
+
+    <record id="lib_action_order" model="ir.actions.act_window">
+        <field name="name">Orders</field>
+        <field name="res_model">library.order</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="target">current</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create data
+            </p>
+        </field>
+    </record>
+
+    <record id="library_order_view_tree" model="ir.ui.view">
+        <field name="name">library.order.view.tree</field>
+        <field name="model">library.order</field>
+        <field name="arch" type="xml">
+            <tree string="Order details">
+                <field name="name_id"></field>
+                <field name="oid"></field>
+                <field name="state"
+                    decoration-danger="state == 'cancelled'" decoration-primary="state == 'pending'"
+                    decoration-info="state == 'ordered'"
+                    widget="badge"
+                ></field>
+                <field name="num"></field>
+
+            </tree>
+        </field>
+    </record>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">library.order.form</field>
+        <field name="model">library.order</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- options="{'clickable': '1'}" -->
+                    <field name="state" widget="statusbar" nolabel="1" statusbar_visible="ordered" />
+                    <button name="o_dform" string="Order" type="object" />
+                    <button name="action_rec" type="object" string="Received" />
+                    <button name="action_pending" type="object" string="Pending" />
+                    <button name="action_cancel" type="object" string="Cancel" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="oid" />
+                        <field name="name_id" />
+                        <field name="num" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="lib_action_orderdetails" model="ir.actions.act_window">
+        <field name="name">Orders</field>
+        <field name="res_model">library.order.details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="target">current</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create data
+            </p>
+        </field>
+    </record>
+
+    <record id="library_orderdetails_view_tree" model="ir.ui.view">
+        <field name="name">library.order.details.view.tree</field>
+        <field name="model">library.order.details</field>
+        <field name="arch" type="xml">
+            <tree string="Order details">
+                <field name="name_id" />
+                <field name="num_b" />
+                <field name="state" decoration-primary="state == 'pending'"
+                    decoration-danger="state == 'cancelled'" widget="badge" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_orderdetails_form" model="ir.ui.view">
+        <field name="name">library.order.details.form</field>
+        <field name="model">library.order.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" nolabel="1" />
+                    <button name="action_pending" type="object"
+                        string="Pending" />
+                    <button name="action_cancel" type="object"
+                        string="Cancel" />
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name_id" />
+                        <field name="num_b" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="lib_action_customer" model="ir.actions.act_window">
+        <field name="name">Customer</field>
+        <field name="res_model">library.customer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="target">current</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create data
+            </p>
+        </field>
+    </record>
+    <record id="library_customer_view_tree" model="ir.ui.view">
+        <field name="name">library.customer.view.tree</field>
+        <field name="model">library.customer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="custid" />
+                <field name="membership" />
+                <field name="d_mem" />
+                <field name="expiry" />
+                <field name="rented_book_ids" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- <record id="user_demo" model="res.users">
+
+        <field name="partner_id" ref="base.partner_demo" />
+        <field name="login"></field>
+        <field name="password"></field>
+        <field name="company_id" ref="base.main_company" />
+        <field name="notify_email">always</field>
+        <field name="groups_id"
+            eval="[(6,0,[ref('base.group_user'), ref('lib.group_lib_customer')])]" />
+
+    </record> -->
+    <!-- <form string="cuwstomer" attrs="{'readonly':[('groups','=','lib.group_lib_customer')]}"> -->
+    <record id="library_customer_form" model="ir.ui.view">
+        <field name="name">library.customer.form</field>
+        <field name="model">library.customer</field>
+        <field name="arch" type="xml">
+            <form string="Customer" create="false" edit="true">
+                <header>
+                    <!-- <button name="search_m" type="object" string="A year"/> -->
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="custid" class="oe_edit_only" />
+                        <h1>
+                            <field name="custid" readonly="1" placeholder="Customer ID" />
+                        </h1>
+                    </div>
+                    <notebook>
+                        <!-- User Details Page -->
+                        <page string="User Details">
+                            <group>
+                                <!-- <group> -->
+                                    <!-- <field name="user_id" class="oe_inline" /> -->
+                                    <!-- <field name="groups_id" class="oe_inline"
+                                        eval="[(4, ref('lib.group_lib_customer'))]" /> -->
+                                <!-- </group> -->
+                                <!-- <group> -->
+                                    <field name="name" />
+                                    <field name="membership" />
+                                    <field name="d_mem" />
+                                    <field name="expiry" />
+                                <!-- </group> -->
+                            </group>
+                        </page>
+
+                        <!-- Rent Details Page -->
+                        <page string="Rent Details">
+                            <group>
+                                <!-- <group> -->
+                                    <field name="rented_book_ids" />
+                                    <field name="rented_book_date" />
+                                    <field name="return_book_date" />
+                                    <field name="penalty" />
+                                <!-- </group> -->
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

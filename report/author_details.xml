@@ -1,0 +1,124 @@
+<odoo>
+    <template id="report_author_details">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <style>
+                        .page {
+                            margin: 20px;
+                            padding: 20px;
+                            font-size: 1rem;
+                            border-radius: 7px;
+                            background-color: #f9f9f9;
+                        }
+
+                        .author-title {
+                            font-size: 32px;
+                            font-weight: bold;
+                            margin-bottom: 20px;
+                            text-align: center;
+                            color: rgb(6, 1, 57);
+                        }
+
+                        .table {
+                            width: 100%;
+                            margin-bottom: 30px;
+                            font-size: 18px;
+                            border-collapse: collapse;
+                        }
+
+                        .table td,
+                        .table th {
+                            padding: 15px;
+                            border: 1px solid black;
+                        }
+
+                        .table th {
+                            font-weight: bold;
+                        }
+
+                        .header {
+                            text-align: center;
+                            margin-bottom: 30px;
+                        }
+
+                        .header h1 {
+                            font-size: 32px;
+                            font-weight: bold;
+                            color: rgb(6, 1, 57);
+                        }
+
+                        .footer {
+                            text-align: center;
+                            margin-top: 30px;
+                        }
+
+                        .footer h6 {
+                            font-size: 14px;
+                            color: rgb(6, 1, 57);
+                        }
+                    </style>
+                    <div class="header">
+                        <div class="row">
+                            <h1>Library</h1>
+                        </div>
+                    </div>
+                    <div class="page">
+                        <div class="oe_structure">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h1 class="author-title">
+                                        <t t-esc="doc.name" />
+                                    </h1>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Author name:</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.name" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Genres by the author:</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.genre_ids" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span>
+                                                    <strong>Other books by the author:</strong>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <ul>
+                                                    <t t-foreach="doc.name_ids" t-as="a">
+                                                        <li>
+                                                            <span t-esc="a.name" />
+                                                        </li>
+                                                    </t>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer o_standard_footer">
+                        <div class="row">
+                            <h6>Contact number: 1236547898</h6>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

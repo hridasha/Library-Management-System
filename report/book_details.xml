@@ -1,0 +1,215 @@
+<odoo>
+    <template id="report_books_details">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.basic_layout">
+                    <!-- <link rel="stylesheet" type="text/scss" href="/lib/static/css/style.css" /> -->
+                    <style>
+                        .page {
+                            margin: 20px;
+                            padding: 20px;
+                            font-size: 1rem;
+                            border-radius: 7px;
+                            background-color: #f9f9f9;
+                        }
+
+                        .book-title {
+                        font-size: 32px;
+                        font-weight: bold;
+                        color: rgb(6, 1, 57);
+                        margin-bottom: 20px;
+                        text-align: center;
+                        }
+
+                        .table {
+                        width: 100%;
+                        margin-bottom: 30px;
+                        font-size: 18px;
+                        border-collapse: collapse;
+                        }
+
+                        .table td,
+                        .table th {
+                        padding: 15px;
+                        border: 1px solid black;
+                        }
+
+                        .table th {
+                        font-weight: bold;
+                        }
+
+                        .author-title {
+                        font-size: 24px;
+                        font-weight: bold;
+                        margin-bottom: 15px;
+                        color: rgb(6, 1, 57);
+                        text-align: center;
+                        }
+                        .image-container {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 200px;
+                        }
+                    
+                        .image-container img {
+                            display: block;
+                            margin: 0 auto;
+                            max-height: 100%;
+                            max-width: 100%;
+                        }
+
+                        .summary {
+                        font-size: 16px;
+                        line-height: 1.5;
+                        margin-top: 10px;
+                        }
+
+                        .header {
+                        text-align: center;
+                        margin-bottom: 30px;
+                        }
+
+                        .header h1 {
+                        font-size: 32px;
+                        font-weight: bold;
+                        color: rgb(6, 1, 57);
+                        }
+
+                        .footer {
+                        text-align: center;
+                        margin-top: 30px;
+                        }
+
+                        .footer h6 {
+                        font-size: 14px;
+                        color: rgb(6, 1, 57);
+                        }
+                    </style>
+
+                    <div class="page">
+                        <div class="header">
+                            <h1>Book details for Library Management</h1>
+                        </div>
+                        <div class="oe_structure">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h1 class="book-title">
+                                        <t t-esc="doc.name" />
+                                    </h1>
+                                    <div class="image-container">
+                                        <img t-if="not doc.image" t-att-src="'/lib/static/description/images.png'" />
+                                        <img t-if="doc.image" t-att-src="image_data_uri(doc.image)" />
+                                    </div>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <td>
+                                                <strong>Book name:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.name"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Price:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.price"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Publishing date:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.pdate"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Days since publishing:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.dpub_s"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Ratings by reader:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.r_reader"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Summary:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.summary"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Book Genre:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.genre"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Publication:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.publication"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <h1 class="author-title">AUTHOR DETAILS</h1>
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <td>
+                                                <strong>Author name:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.name_id"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Other genre by the author:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.genre_ids"></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Other books by the author:</strong>
+                                            </td>
+                                            <td>
+                                                <span t-field="doc.book"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer o_standard_footer">
+                            <div class="row">
+                                <h6>Contact number: 8899774455</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

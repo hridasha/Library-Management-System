@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- book action -->
+    <record id="lib_action_book" model="ir.actions.act_window">
+        <field name="name">Library</field>
+        <field name="res_model">libray.management.system</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create data
+            </p>
+        </field>
+    </record>
+
+    <!-- tree view book -->
+    <record id="view_book_tree" model="ir.ui.view">
+        <field name="name">libray.management.system.tree</field>
+        <field name="model">libray.management.system</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"></field>
+                <field name="num"></field>
+                <field name="avability"></field>
+                <field name="publication"></field>
+                <field name="name_id"></field>
+                <field name="rent_count"></field>
+                <field name="image"></field>
+                <field name="dpub_s" invisible="1"></field>
+            </tree>
+        </field>
+    </record>
+
+    <!-- form view book -->
+    <record id="view_book_form" model="ir.ui.view">
+        <field name="name">libray.management.system.form</field>
+        <field name="model">libray.management.system</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <!-- <button name="author " type="object" string="Add authors"/> -->
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar" nolabel="1"></field>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"></field>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"></field>
+                            <field name="price"></field>
+                            <field name="dpub"></field>
+                        </group>
+                        <group>
+                            <field name="ratings"></field>
+                            <field name="pdate"></field>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <div>
+                                <h1>
+                                    <label for='r_reader'>Label</label>
+                                    <field name="r_reader" class="oe_title" widget="priority"
+                                        attrs="{'invisible': [('dpub', '==', 'Not published yet')]}"></field>
+                                </h1>
+                            </div>
+                            <group>
+                                <field name="name_id"></field>
+                                <field name="rent_count"></field>
+                                <field name="num"></field>
+                                <field name="avability"></field>
+                                <field name="publication"></field>
+                                <field name="genre"></field>
+                                <field name="book" attrs="{'invisible': [('name_id', '=', False)]}"></field>
+                            </group>
+                        </page>
+                        <page string="Summary" name="description">
+                            <group>
+                                <field name="summary" placeholder="Enter summary"></field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_book_kanban" model="ir.ui.view">
+        <field name="name">libray.management.system.kanban</field>
+        <field name="model">libray.management.system</field>
+        <field name="arch" type="xml">
+            <!-- <kanban default_group_by="avability"> -->
+            <kanban >
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click"
+                            style="border: 1px solid #ccc; border-radius: 5px; padding: 10px; display: flex; align-items: center;">
+                            <div class="o_kanban_image" style="flex: 0 0 auto; margin-right: 10px;">
+                                <img class="o_kanban_image_inner_pic"
+                                    t-att-src="kanban_image('proj.libray.management.system', 'image', record.id &amp;&amp; record.id.value)"
+                                    style="max-width: 100%; height: auto;" alt="Book Image" />
+                            </div>
+                            <div class="oe_kanban_details d-flex flex-column"
+                                style="flex: 1 1 auto;">
+                                <div class="oe_kanban_title">
+                                    <strong style="font-size: 16px; color: #333;">
+                                        <field name="name" style="margin-bottom: 5px;" />
+                                    </strong>
+                                </div>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="font-size: 14px; color: #777; margin-bottom: 5px;">
+                                        <span style="font-weight: bold;">Summary:</span>
+                                        <field name="summary" style="margin-left: 5px;" />
+                                    </li>
+                                    <li style="font-size: 14px; color: #555;">
+                                        <span style="font-weight: bold;">Publication:</span>
+                                        <field name="publication" style="margin-left: 5px;" />
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+                <field name="image" widget="image" />
+                <field name="name" />
+                <field name="summary" />
+                <field name="publication" />
+            </kanban>
+        </field>
+    </record>
+
+
+    <!-- search view book -->
+    <record id="view_book_search" model="ir.ui.view">
+        <field name="name">libray.management.system.search</field>
+        <field name="model">libray.management.system</field>
+        <field name="arch" type="xml">
+            <search string="Test">
+                <field name="name" string="Book name"
+                    filter_domain="['|',('name','ilike',self),('genre','ilike',self)]"></field>
+                <field name="publication" string="Publication"></field>
+                <field name="genre" string="Genre"></field>
+                <filter name="filter_novel" string="Novel" domain="[('genre', '=', 'novel')]" />
+                <filter name="filter_fiction" string="Fiction" domain="[('genre', '=', 'fiction')]" />
+                <separator />
+                <filter name="filter_publication" string="Publication XYZ"
+                    domain="[('publication', '=', 'xyz')]" />
+                <group string="Group By">
+                    <filter name="publication" string="Publication"
+                        context="{'group_by': 'publication'}" />
+                    <filter name="dpub_s" string="DPub" context="{'group_by': 'dpub_s'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

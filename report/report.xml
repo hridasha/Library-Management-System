@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_book_detials" model="ir.actions.report">
+        <field name="name">Books Details</field>
+        <field name="model">libray.management.system</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">proj.report_books_details</field>
+        <field name="report_file">proj.report_books_details</field>
+        <field name="binding_model_id" ref="model_libray_management_system" />
+        <field name="binding_type">report</field>
+    </record>
+    <record id="action_author_detials" model="ir.actions.report">
+        <field name="name">Author Details</field>
+        <field name="model">libray.author</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">proj.report_author_details</field>
+        <field name="report_file">proj.report_author_details</field>
+        <field name="binding_model_id" ref="model_libray_author" />
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="library_menu" name="Library" sequence="0" />
+    <menuitem id="genre_menu" name="Genre" parent="library_menu" action="lib_action_genre"
+        sequence="5" />
+    <menuitem id="authors_menu" name="Authors" action="lib_action_author" parent="library_menu"
+        sequence="2" />
+    <menuitem id="books_menu" name="Books" parent="library_menu" action="lib_action_book"
+        sequence="3" />
+    <menuitem id="cancel_orders_menu" name="Cancel Order" action="lib_cancel_order"
+        parent="orders_menu" sequence="5" />
+    <menuitem id="customer_menu" name="Customer" parent="library_menu" action="lib_action_customer"
+        sequence="5" />
+    <menuitem id="orders_menu" name="Order" parent="library_menu" sequence="4" />
+    <menuitem id="order_menu" name="Order Books" action="lib_action_order" parent="orders_menu"
+        sequence="4" />
+    <menuitem id="orders_details_menu" name="Order details" action="lib_action_orderdetails"
+        parent="orders_menu" sequence="4" />
+    <menuitem id="rent_menu" name="Rent" parent="library_menu" action="lib_action_rent" sequence="5" />
+    <menuitem name="Attendance" id="menu_attendance_root" parent="library_menu" />
+
+    <menuitem id="menu_reporting_kanban" name="Reporting" parent="menu_attendance_root"
+        action="action_attendance_kanban" />
+
+    <menuitem id="menu_details" name="Details" parent="menu_attendance_root"
+        action="action_attendance_details"  />
+    
+</odoo>

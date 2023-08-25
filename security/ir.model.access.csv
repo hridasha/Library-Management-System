@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+proj.access_libray_management_system,access_libray_management_system,proj.model_libray_management_system,base.group_user,1,1,1,1
+proj.access_libray_author,access_libray_author,proj.model_libray_author,base.group_user,1,1,1,1
+proj.access_libray_genre,access_libray_genre,proj.model_libray_genre,base.group_user,1,1,1,1
+proj.access_library_order,access_library_order,proj.model_library_order,base.group_user,1,1,1,1
+proj.access_library_order_details,access_library_order_details,proj.model_library_order_details,base.group_user,1,1,1,1
+proj.access_cancel_order_wiz,access_cancel_order_wiz,proj.model_cancel_order_wiz,base.group_user,1,1,1,1
+proj.access_library_customer,access_library_customer,proj.model_library_customer,base.group_user,1,1,1,1
+proj.access_library_rent,access_library_rent,proj.model_library_rent,base.group_user,1,1,1,1
+proj.access_my_attendance_attendance,access_my_attendance_attendance,proj.model_my_attendance_attendance,base.group_user,1,1,1,1
